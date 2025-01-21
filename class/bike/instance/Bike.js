@@ -51,6 +51,7 @@ export default class Bike {
         this.keyLog.set('leftPressed', new Array());
         this.keyLog.set('rightPressed', new Array());
         this.keyLog.set('turnPressed', new Array());
+        this.keyLog.set('crouchPressed', new Array());
 
         this.setBikeInitialState(track.origin);
     }
@@ -66,9 +67,13 @@ export default class Bike {
         this.headToBack.lean(rotate * 5 * this.direction, 5);
         this.headToFront.lean(-rotate * 5 * this.direction, 5);
         this.frontToBack.rotate(rotate / this.rotationFactor);
-        if (!rotate && this.runner.upPressed) {
+        if (!rotate && this.runner.upPressed && !this.runner.crouchPressed) {
             this.headToBack.lean(-7, 5);
             this.headToFront.lean(7, 5);
+        }
+        if (this.runner.crouchPressed) {
+            this.headToBack.lean(-25, -20);
+            this.headToFront.lean(-25, -20);
         }
     }
 
@@ -180,6 +185,7 @@ export default class Bike {
         keyLogClone.set('leftPressed', [...this.keyLog.get('leftPressed')]);
         keyLogClone.set('rightPressed', [...this.keyLog.get('rightPressed')]);
         keyLogClone.set('turnPressed', [...this.keyLog.get('turnPressed')]);
+        keyLogClone.set('crouchPressed', [...this.keyLog.get('crouchPressed')]);
         clone.keyLog = keyLogClone;
 
         return clone;
