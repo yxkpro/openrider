@@ -33,6 +33,7 @@ function setContextProperties(ctx) {
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     ctx.font = 'bold 15px Ubuntu';
+    ctx.scale(devicePixelRatio, devicePixelRatio);
 }
 
 /**
@@ -42,6 +43,7 @@ function newGame(opt) {
     game = new Game(canvas, opt);
     game.run();
     game.stateManager.push('parser');
+    setCanvasSize();
 }
 
 function toggleGhost(ghostId) {
