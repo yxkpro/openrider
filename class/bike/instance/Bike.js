@@ -5,30 +5,16 @@ import Vector from "../../numeric/Vector.js";
 import Track from "../../track/Track.js";
 import BikeRunner from "../BikeRunner.js";
 import Spring from "../physics/Spring.js";
+import Vehicle from "./Vehicle.js";
 
-export default class Bike {
-    static get bikeName() { return 'Bike'; }
-
+export default class Bike extends Vehicle {
     /**
      *
      * @param {Track} track
      * @param {BikeRunner} runner
      */
     constructor(track, runner) {
-        /** @type {Track} */
-        this.track = track;
-        this.runner = runner;
-        this.friction = 0.99;
-
-        this.distance = 0;
-        this.direction = 1;
-        this.gravity = new Vector(0, 0.3);
-
-        this.slow = false;
-        this.slowParity = 0;
-
-        this.color = '#000';
-        this.headGear = 'hat';
+        super(track, runner);
 
         this.rotationFactor = 0;
 
@@ -67,7 +53,7 @@ export default class Bike {
         this.headToBack.lean(rotate * 5 * this.direction, 5);
         this.headToFront.lean(-rotate * 5 * this.direction, 5);
         this.frontToBack.rotate(rotate / this.rotationFactor);
-        if (!rotate && this.runner.upPressed && !this.runner.crouchPressed) {
+        if (!rotate && this.runner.upPressed  && !this.runner.crouchPressed) {
             this.headToBack.lean(-7, 5);
             this.headToFront.lean(7, 5);
         }
@@ -75,14 +61,6 @@ export default class Bike {
             this.headToBack.lean(-25, -20);
             this.headToFront.lean(-25, -20);
         }
-    }
-
-    /** @param {boolean} slow */
-    setSlow(slow) {
-        if ((!this.slow && slow) || !slow) {
-            this.slowParity = 0;
-        }
-        this.slow = slow;
     }
 
     turn() {

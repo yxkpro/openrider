@@ -129,9 +129,11 @@ export default class BMXRenderer {
         ]);
         // head
         ctx.lineWidth = 2 * bike.track.zoomFactor;
+        ctx.fillStyle = '#fff';
         ctx.beginPath();
         ctx.moveTo(headCenter.x + headRadius, headCenter.y)
         ctx.arc(headCenter.x, headCenter.y, headRadius, 0, 2 * Math.PI, true);
+        ctx.fill();
         ctx.stroke();
         // head gear
         let hatFrontBottom = playerTransform.scale(0.35, 1.15);

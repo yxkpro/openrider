@@ -8,6 +8,7 @@ import Bike from "./instance/Bike.js";
 import Ragdoll from "../entity/Ragdoll.js";
 import ReachableItem from "../item/ReachableItem.js";
 import { MODIFIERS } from "../constant/ItemConstants.js";
+import Vehicle from './instance/Vehicle.js';
 
 export default class BikeRunner extends GameObject {
     constructor(track, bikeClass) {
@@ -234,7 +235,7 @@ export default class BikeRunner extends GameObject {
             this.save();
         }
 
-        if (this.instance instanceof Bike) {
+        if (this.instance instanceof Vehicle) {
             if (this.instance.backWheel.driving && this.instance.frontWheel.driving && !this.dead) {
                 this.instance.setSlow(false);
             }
@@ -266,7 +267,7 @@ export default class BikeRunner extends GameObject {
     }
 
     update(progress, delta) {
-        if (this.instance instanceof Bike) {
+        if (this.instance instanceof Vehicle) {
             if (this.instance.slow) {
                 progress = (progress + this.instance.slowParity) / 2;
             }
@@ -284,7 +285,7 @@ export default class BikeRunner extends GameObject {
     }
 
     render(ctx) {
-        if (this.instance instanceof Bike) {
+        if (this.instance instanceof Vehicle) {
             this.renderInstance(ctx);
         }
 
@@ -295,7 +296,7 @@ export default class BikeRunner extends GameObject {
 
     renderDebug(ctx) {
         let points = new Array();
-        if (this.instance instanceof Bike) {
+        if (this.instance instanceof Vehicle) {
             points = points.concat(this.instance.points);
         }
         if (this.deadObject instanceof Entity) {
