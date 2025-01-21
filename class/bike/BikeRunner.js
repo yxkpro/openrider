@@ -31,6 +31,7 @@ export default class BikeRunner extends GameObject {
         this.leftPressed = false;
         this.rightPressed = false;
         this.turnPressed = false;
+        this.crouchPressed = false;
 
         /** @type {Map<number, ReachableItem>} */
         this.actionQueue = new Map();
@@ -67,6 +68,7 @@ export default class BikeRunner extends GameObject {
         this.leftPressed = false;
         this.rightPressed = false;
         this.turnPressed = false;
+        this.crouchPressed = false;
 
         this.modifiersMask = 0;
 
@@ -82,6 +84,7 @@ export default class BikeRunner extends GameObject {
             this.leftPressed = snapshot.leftPressed;
             this.rightPressed = snapshot.rightPressed;
             this.turnPressed = snapshot.turnPressed;
+            this.crouchPressed = snapshot.crouchPressed;
 
             this.modifiersMask = snapshot.modifiersMask;
 
@@ -105,6 +108,7 @@ export default class BikeRunner extends GameObject {
         this.leftPressed = false;
         this.rightPressed = false;
         this.turnPressed = false;
+        this.crouchPressed = false;
 
         this.instance.hitbox.touch = false;
         this.instance.hitbox.drive = () => {};
@@ -184,6 +188,7 @@ export default class BikeRunner extends GameObject {
             leftPressed: this.leftPressed,
             rightPressed: this.rightPressed,
             turnPressed: this.turnPressed,
+            crouchPressed: this.crouchPressed,
             bike: this.instance.clone(),
             modifiersMask: this.modifiersMask
         };
